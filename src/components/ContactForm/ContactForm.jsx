@@ -1,5 +1,4 @@
 import { Formik } from 'formik';
-import { nanoid } from 'nanoid';
 import * as Yup from 'yup';
 import {
   AddContactForm,
@@ -14,7 +13,7 @@ const DisplayingErrorMessagesSchema = Yup.object().shape({
     .max(50, 'Too Long!')
     .required('Please enter the required field')
     .matches(/^[aA-zZ\s]+$/, 'Only alphabets are allowed for this field '),
-  number: Yup.string()
+  phone: Yup.string()
     .matches(
       /^(?:\+38)?(0\d{9})$/,
       'Phone number is not valid. For example 0XXXXXXXXX'
@@ -25,10 +24,9 @@ const DisplayingErrorMessagesSchema = Yup.object().shape({
 const ContactForm = ({ onAddContact }) => {
   return (
     <Formik
-      initialValues={{ name: '', number: '', id: '' }}
+      initialValues={{ name: '', phone: '' }}
       validationSchema={DisplayingErrorMessagesSchema}
       onSubmit={(values, actions) => {
-        values.id = nanoid(5);
         actions.resetForm();
         onAddContact(values);
       }}
@@ -43,11 +41,11 @@ const ContactForm = ({ onAddContact }) => {
             )}
           </label>
 
-          <label htmlFor="number">
+          <label htmlFor="phone">
             Number
-            <Input type="tel" name="number" id="number" required />
-            {touched.number && errors.number && (
-              <ErrorMesage>{errors.number}</ErrorMesage>
+            <Input type="tel" name="phone" id="phone" required />
+            {touched.phone && errors.phone && (
+              <ErrorMesage>{errors.phone}</ErrorMesage>
             )}
           </label>
 

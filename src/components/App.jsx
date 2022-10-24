@@ -1,16 +1,22 @@
+import { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import ContactForm from './ContactForm/ContactForm';
 import Filter from './Filter/Filter';
 import ContactList from './ContactList/ContactList';
-import { addContact } from '../redux/contactsSlice';
+import { fetchContacts, addContact } from 'redux/operation';
 
 const App = () => {
   const dispatch = useDispatch();
-  const contacts = useSelector(state => state.contactsState.contacts);
+  const contacts = useSelector(state => state.contacts.contacts.items);
+  console.log(contacts);
+
+  useEffect(() => {
+    dispatch(fetchContacts());
+  }, [dispatch]);
 
   const handleAddContactForm = newContact => {
-    if (contacts && contacts.some(el => el.number === newContact.number)) {
-      window.alert(`${newContact.number} is already exist in your phonebook`);
+    if (contacts && contacts.some(el => el.phone === newContact.phone)) {
+      window.alert(`${newContact.phone} is already exist in your phonebook`);
       return;
     }
 
