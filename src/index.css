@@ -19,3 +19,22 @@ code {
 li {
   margin-bottom: 10px;
 }
+
+.title {
+  color: red;
+  display: inline-block;
+  margin-right: 20px;
+}
+
+.loader {
+  display: inline-block;
+}
+
+.rotate {
+  animation: rotate 1s cubic-bezier(0, 0.28, 1, 0.73) infinite;
+}
+@keyframes rotate {
+  to {
+    transform: rotate(-360deg);
+  }
+}

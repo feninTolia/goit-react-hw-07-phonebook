@@ -1,4 +1,5 @@
 import { Formik } from 'formik';
+import { useSelector } from 'react-redux';
 import * as Yup from 'yup';
 import {
   AddContactForm,
@@ -22,6 +23,8 @@ const DisplayingErrorMessagesSchema = Yup.object().shape({
 });
 
 const ContactForm = ({ onAddContact }) => {
+  const { isLoading } = useSelector(state => state.contacts);
+
   return (
     <Formik
       initialValues={{ name: '', phone: '' }}
@@ -49,7 +52,9 @@ const ContactForm = ({ onAddContact }) => {
             )}
           </label>
 
-          <AddContactBtn type="submit">Add contact</AddContactBtn>
+          <AddContactBtn type="submit" disabled={isLoading && true}>
+            Add contact
+          </AddContactBtn>
         </AddContactForm>
       )}
     </Formik>

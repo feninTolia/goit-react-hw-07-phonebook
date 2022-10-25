@@ -8,7 +8,7 @@ import { fetchContacts, addContact } from 'redux/operation';
 const App = () => {
   const dispatch = useDispatch();
   const contacts = useSelector(state => state.contacts.contacts.items);
-  console.log(contacts);
+  const { isLoading, error } = useSelector(state => state.contacts);
 
   useEffect(() => {
     dispatch(fetchContacts());
@@ -30,12 +30,19 @@ const App = () => {
 
   return (
     <>
-      <h1>Phonebook</h1>
+      <h1 className="title">Phonebook</h1>
+      {isLoading && (
+        <img
+          src="https://img.icons8.com/color/48/000000/iphone-spinner--v1.png"
+          alt=""
+          className="rotate"
+        />
+      )}
       <ContactForm onAddContact={handleAddContactForm} />
-
-      <h2>Contacts</h2>
-      <Filter />
+      {contacts.length > 0 && <h2>Contacts</h2>}
+      {contacts.length > 0 && <Filter />}
       <ContactList />
+      {error && <h2>Oooops, smth went wrong (×﹏×)</h2>}
     </>
   );
 };
