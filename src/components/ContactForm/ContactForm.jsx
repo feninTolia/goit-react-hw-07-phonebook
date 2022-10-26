@@ -7,6 +7,7 @@ import {
   AddContactBtn,
   ErrorMesage,
 } from './ContactForm.styled';
+import { selectContacts } from 'redux/selectors';
 
 const DisplayingErrorMessagesSchema = Yup.object().shape({
   name: Yup.string()
@@ -23,7 +24,7 @@ const DisplayingErrorMessagesSchema = Yup.object().shape({
 });
 
 const ContactForm = ({ onAddContact }) => {
-  const { isLoading } = useSelector(state => state.contacts);
+  const { isLoading } = useSelector(selectContacts);
 
   return (
     <Formik

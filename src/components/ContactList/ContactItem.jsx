@@ -1,7 +1,8 @@
 import { useSelector } from 'react-redux';
+import { selectContacts } from 'redux/selectors';
 
 const ContactItem = ({ id, name, number, onDeleteContact }) => {
-  const { isLoading } = useSelector(state => state.contacts);
+  const { isLoading } = useSelector(selectContacts);
 
   return (
     <li>
